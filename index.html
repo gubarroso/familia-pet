@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>PetCare — Pet Shop, Estética e Veterinário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Montserrat,Helvetica,Arial,sans-serif;color:#222;background:#fff;-webkit-font-smoothing:antialiased}
+a{color:#4A6B36;text-decoration:none}
+a:hover{color:#36502a}
+*{box-sizing:border-box}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid #4A6B36;outline-offset:3px}
+</style>
+</helmet>
+
+<header id="inicio" style="position:sticky;top:0;z-index:20;background:#fff">
+  <div style="background:#4A6B36;color:#fff;font-size:11px">
+    <div style="max-width:1140px;margin:0 auto;padding:7px 24px;display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center">
+      <a href="tel:+5511000000000" style="color:#fff;display:flex;gap:7px;align-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"></path></svg>(11) 00000-0000</a>
+      <a href="mailto:contato@petcare.com.br" style="color:#fff;display:flex;gap:7px;align-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>contato@petcare.com.br</a>
+      <div style="margin-left:auto;display:flex;gap:18px;align-items:center">
+        <span>Seg a Sex 08h–19h · Sáb 08h–17h</span>
+        <a href="#contato" aria-label="Instagram" style="color:#fff;display:flex"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle></svg></a>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Principal" style="border-bottom:1px solid #eee;background:#fff">
+    <div style="max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:stretch;justify-content:space-between;min-height:64px">
+      <a href="#inicio" style="display:flex;align-items:center;gap:8px;color:#222">
+        <span style="width:34px;height:34px;border-radius:50%;background:#4A6B36;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="4.6" ry="3.8"></ellipse><circle cx="6" cy="10.5" r="2"></circle><circle cx="9.6" cy="6.6" r="2"></circle><circle cx="14.4" cy="6.6" r="2"></circle><circle cx="18" cy="10.5" r="2"></circle></svg></span>
+        <span style="display:flex;flex-direction:column;line-height:1"><span style="font-weight:700;font-size:22px;letter-spacing:.5px;color:#3f4a3a">PETCARE</span><span style="font-size:9.5px;font-weight:600;color:#4A6B36;margin-top:3px">Pet Shop &amp; Veterinário</span></span>
+      </a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <ul style="list-style:none;margin:0;padding:0;display:flex;align-items:stretch">
+          <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+            <li style="display:flex"><a href="{{ n.href }}" onClick="{{ n.onClick }}" aria-current="{{ n.current }}" style="{{ n.style }}">{{ n.label }}</a></li>
+          </sc-for>
+        </ul>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menu" aria-expanded="{{ menuOpen }}" style="align-self:center;width:44px;height:44px;border:1px solid #ddd;background:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#4A6B36"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
+      <ul style="list-style:none;margin:0;padding:8px 24px 16px;display:flex;flex-direction:column;border-top:1px solid #eee">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+          <li><a href="{{ n.href }}" onClick="{{ n.onClick }}" style="display:block;padding:12px 0;font-size:12px;font-weight:600;letter-spacing:.5px;color:#333;border-bottom:1px solid #f0f0f0">{{ n.label }}</a></li>
+        </sc-for>
+      </ul>
+    </sc-if>
+  </nav>
+</header>
+
+<main>
+<section aria-label="Destaque" style="background:#F5EBCD;position:relative;overflow:hidden">
+  <div aria-hidden="true" style="position:absolute;left:-46px;bottom:28px;width:120px;height:120px;border-radius:50%;overflow:hidden;opacity:.95">
+    <image-slot id="hero-racao" shape="circle" src="assets/racao-bowl.jpg" alt="Tigela com ração" placeholder="tigela de ração"></image-slot>
+  </div>
+  <div style="max-width:1140px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;align-items:flex-end;min-height:420px;gap:0 24px">
+    <div style="flex:1 1 300px;min-width:0;display:flex;gap:26px;align-items:center;padding:72px 0 64px;align-self:center">
+      <div aria-hidden="true" style="display:flex;flex-direction:column;gap:9px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#4A6B36"></span>
+        <span style="width:9px;height:9px;border-radius:50%;border:1.5px solid #4A6B36"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#4A6B36"></span>
+      </div>
+      <div style="max-width:380px">
+        <h1 style="font-size:26px;font-weight:600;color:#222;line-height:1.3;margin-bottom:22px">Cuidado que seu pet sente.</h1>
+        <p style="font-size:13px;line-height:1.75;color:#666;margin-bottom:42px;text-wrap:pretty">Banho, estética e cuidados veterinários para manter seu melhor amigo saudável, bonito e feliz.</p>
+        <a href="#servicos" style="display:inline-block;padding:9px 22px;border:1.5px solid #8A9C7C;border-radius:20px;font-size:10.5px;font-weight:600;letter-spacing:.6px;color:#6f7f63;transition:all .25s" style-hover="background:#4A6B36;border-color:#4A6B36;color:#fff">CONHEÇA NOSSOS SERVIÇOS</a>
+      </div>
+    </div>
+    <div style="flex:1 1 340px;min-width:0;height:360px;position:relative;align-self:flex-end;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 18%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 18%);mask-composite:intersect">
+      <image-slot id="hero-dog" shape="rect" fit="cover" src="assets/hero-beagle.jpg" alt="Beagle deitado olhando para cima" placeholder="cachorro principal · PNG recortado, deitado olhando para frente"></image-slot>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" aria-label="Destaques" style="padding:76px 24px 40px">
+  <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px">
+    <sc-for list="{{ highlights }}" as="c" hint-placeholder-count="3">
+      <article style="background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.13);padding:26px 22px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.16)">
+        <div style="width:66px;height:66px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+          <sc-if value="{{ c.paw }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><ellipse cx="12" cy="16" rx="4.4" ry="3.6"></ellipse><circle cx="6" cy="10.5" r="1.8"></circle><circle cx="9.6" cy="6.6" r="1.8"></circle><circle cx="14.4" cy="6.6" r="1.8"></circle><circle cx="18" cy="10.5" r="1.8"></circle></svg></sc-if>
+          <sc-if value="{{ c.scissors }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M8 16L17 3M16 16L7 3"></path></svg></sc-if>
+          <sc-if value="{{ c.vet }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"></path><path d="M10 13v2a5 5 0 0 0 10 0v-2"></path><circle cx="20" cy="11" r="2"></circle></svg></sc-if>
+        </div>
+        <h3 style="font-size:14px;font-weight:600;color:#222;margin-bottom:18px">{{ c.title }}</h3>
+        <p style="font-size:11.5px;line-height:1.75;color:#666;margin-bottom:24px;text-wrap:pretty">{{ c.text }}</p>
+        <a href="{{ c.href }}" aria-label="{{ c.aria }}" style="{{ c.btnStyle }}" style-hover="background:#4A6B36;border-color:#2f4522"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<section aria-labelledby="inst-title" style="background:#4A6B36;margin-top:90px;color:#fff">
+  <div style="max-width:1140px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center">
+    <div style="flex:0 0 320px;width:320px;max-width:100%;height:460px;margin:-100px auto -40px;position:relative">
+      <img src="assets/inst-jack.png" alt="Jack Russell Terrier curioso olhando para cima" style="display:block;width:100%;height:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))">
+    </div>
+    <div style="flex:1 1 320px;min-width:0;padding:56px 0 50px">
+      <h2 id="inst-title" style="font-size:24px;font-weight:600;line-height:1.35;margin-bottom:16px;max-width:460px">Cuidado completo para quem faz parte da família.</h2>
+      <p style="font-size:12.5px;line-height:1.85;color:#EEF2EA;margin-bottom:16px;max-width:520px;text-wrap:pretty">Mais do que um pet shop, somos um espaço dedicado ao bem-estar dos animais. Unimos estética, produtos e atendimento veterinário em um só lugar.</p>
+      <p style="font-size:12.5px;line-height:1.85;color:#EEF2EA;margin-bottom:26px;max-width:520px;text-wrap:pretty">Da rotina de banho e tosa aos cuidados especializados, nossa equipe busca oferecer um atendimento acolhedor, seguro e pensado para cada pet.</p>
+      <a href="#servicos" style="display:inline-block;padding:9px 26px;border:1.5px solid #A9B99C;border-radius:20px;font-size:10.5px;font-weight:600;letter-spacing:.6px;color:#E4EADF;transition:all .25s" style-hover="border-color:#fff;color:#fff;background:rgba(255,255,255,.08)">SAIBA MAIS</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicos" aria-labelledby="serv-title" style="padding:100px 24px 40px">
+  <div style="max-width:1080px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:48px">
+      <h2 id="serv-title" style="font-size:24px;font-weight:600;margin-bottom:10px">Nossos serviços</h2>
+      <p style="font-size:13px;color:#777">Cuidados para todas as fases da vida do seu pet.</p>
+    </div>
+    <h3 style="font-size:11px;font-weight:600;letter-spacing:1.2px;color:#4A6B36;margin-bottom:16px">ESTÉTICA ANIMAL</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;margin-bottom:44px">
+      <sc-for list="{{ servicesEst }}" as="s" hint-placeholder-count="3">
+        <div style="background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:22px;display:flex;gap:16px;align-items:flex-start;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.12)">
+          <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="18" r="3"></circle><path d="M8 16L17 3M16 16L7 3"></path></svg></span>
+          <div><h4 style="margin:2px 0 6px;font-size:13.5px;font-weight:600">{{ s.name }}</h4><p style="font-size:11.5px;line-height:1.65;color:#777">{{ s.desc }}</p></div>
+        </div>
+      </sc-for>
+    </div>
+    <h3 id="veterinario" style="font-size:11px;font-weight:600;letter-spacing:1.2px;color:#4A6B36;margin-bottom:16px;scroll-margin-top:120px">ATENDIMENTO VETERINÁRIO</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px">
+      <sc-for list="{{ servicesVet }}" as="s" hint-placeholder-count="9">
+        <div style="background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:22px;display:flex;gap:16px;align-items:flex-start;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.12)">
+          <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"></path><path d="M10 13v2a5 5 0 0 0 10 0v-2"></path><circle cx="20" cy="11" r="2"></circle></svg></span>
+          <div><h4 style="margin:2px 0 6px;font-size:13.5px;font-weight:600">{{ s.name }}</h4><p style="font-size:11.5px;line-height:1.65;color:#777">{{ s.desc }}</p></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="galeria" aria-labelledby="gal-title" style="padding:80px 24px 40px">
+  <div style="max-width:1080px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:44px">
+      <h2 id="gal-title" style="font-size:24px;font-weight:600;margin-bottom:10px">Depois do carinho, vem o sorriso.</h2>
+      <p style="font-size:13px;color:#777">Confira alguns dos nossos clientes depois de um dia de cuidados.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));grid-auto-rows:240px;gap:20px">
+      <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="6">
+        <figure style="margin:0;position:relative;border-radius:6px;overflow:hidden;box-shadow:0 6px 22px rgba(0,0,0,.1);transition:transform .3s" style-hover="transform:scale(1.02)">
+          <image-slot id="{{ g.id }}" src="{{ g.src }}" alt="{{ g.ph }}" shape="rounded" radius="6" placeholder="{{ g.ph }}"></image-slot>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="petshop" aria-labelledby="prod-title" style="padding:80px 24px 40px">
+  <div style="max-width:1080px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:44px">
+      <h2 id="prod-title" style="font-size:24px;font-weight:600;margin-bottom:10px">Produtos para cuidar em casa</h2>
+      <p style="font-size:13px;color:#777">Encontre na loja o que seu pet precisa no dia a dia.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:22px">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+        <article style="background:#fff;box-shadow:0 6px 22px rgba(0,0,0,.1);text-align:center;transition:transform .25s,box-shadow .25s" style-hover="transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.14)">
+          <div style="height:150px;position:relative"><image-slot id="{{ p.id }}" src="{{ p.src }}" alt="{{ p.name }}" shape="rect" placeholder="{{ p.ph }}"></image-slot></div>
+          <div style="padding:18px 14px 22px">
+            <h3 style="font-size:13.5px;font-weight:600;margin-bottom:8px">{{ p.name }}</h3>
+            <p style="font-size:11.5px;line-height:1.6;color:#777">{{ p.desc }}</p>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="pag-title" style="padding:80px 24px 20px">
+  <div style="max-width:960px;margin:0 auto;background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.1);padding:40px 36px;display:flex;flex-wrap:wrap;gap:28px 48px;align-items:center">
+    <div style="flex:1 1 280px">
+      <h2 id="pag-title" style="font-size:20px;font-weight:600;margin-bottom:10px">Facilidade para você</h2>
+      <p style="font-size:12.5px;line-height:1.75;color:#777;text-wrap:pretty">Oferecemos diferentes formas de pagamento para tornar o cuidado com seu pet ainda mais simples.</p>
+    </div>
+    <ul style="flex:1 1 360px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:20px">
+      <li style="display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12px;font-weight:600;color:#444"><span style="width:50px;height:50px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 9-9 9-9-9z"></path><path d="M12 8l4 4-4 4-4-4z"></path></svg></span>Pix</li>
+      <li style="display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12px;font-weight:600;color:#444;text-align:center"><span style="width:50px;height:50px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 15h3"></path></svg></span>Cartão de crédito</li>
+      <li style="display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12px;font-weight:600;color:#444;text-align:center"><span style="width:50px;height:50px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18M14 15h3"></path></svg></span>Cartão de débito</li>
+      <li style="display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12px;font-weight:600;color:#444"><span style="width:50px;height:50px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="1"></rect><circle cx="12" cy="12" r="2.5"></circle></svg></span>Dinheiro</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="loja-title" style="padding:80px 24px 90px">
+  <div style="max-width:960px;margin:0 auto">
+    <h2 id="loja-title" style="font-size:24px;font-weight:600;text-align:center;margin-bottom:44px">Visite nossa loja</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px">
+      <div style="text-align:center;display:flex;flex-direction:column;align-items:center">
+        <span style="width:56px;height:56px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:10px">Horário de atendimento</h3>
+        <p style="font-size:12px;line-height:1.8;color:#777">Segunda a sexta: 08h às 19h<br>Sábado: 08h às 17h</p>
+      </div>
+      <div style="text-align:center;display:flex;flex-direction:column;align-items:center">
+        <span style="width:56px;height:56px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"></path><path d="M10 13v2a5 5 0 0 0 10 0v-2"></path><circle cx="20" cy="11" r="2"></circle></svg></span>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:10px">Atendimento veterinário</h3>
+        <p style="font-size:12px;line-height:1.8;color:#777">Consulte horários e disponibilidade.</p>
+      </div>
+      <div style="text-align:center;display:flex;flex-direction:column;align-items:center">
+        <span style="width:56px;height:56px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg></span>
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:10px">Localização</h3>
+        <p style="font-size:12px;line-height:1.8;color:#777">Rua dos Pets, 100 — São Paulo, SP</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" aria-labelledby="cont-title" style="background:#F5EBCD;padding:72px 24px">
+  <div style="max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:32px 56px;align-items:center;justify-content:space-between">
+    <div style="flex:1 1 320px">
+      <h2 id="cont-title" style="font-size:24px;font-weight:600;margin-bottom:12px">Seu pet merece esse cuidado.</h2>
+      <p style="font-size:13px;line-height:1.75;color:#666;margin-bottom:28px">Agende um horário ou fale com nossa equipe.</p>
+      <a href="https://wa.me/5511000000000" style="display:inline-block;padding:11px 30px;background:#4A6B36;border:1.5px solid #4A6B36;border-radius:22px;font-size:11px;font-weight:600;letter-spacing:.6px;color:#fff;transition:all .25s" style-hover="background:#3b5a2a;color:#fff">FALE CONOSCO</a>
+    </div>
+    <ul style="flex:1 1 300px;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px 24px">
+      <li><a href="https://wa.me/5511000000000" style="display:flex;gap:12px;align-items:center;color:#333;font-size:12.5px"><span style="flex:none;width:38px;height:38px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"></path></svg></span><span><strong style="display:block;font-size:11px;color:#4A6B36;font-weight:600">WhatsApp</strong>(11) 00000-0000</span></a></li>
+      <li><a href="tel:+5511000000000" style="display:flex;gap:12px;align-items:center;color:#333;font-size:12.5px"><span style="flex:none;width:38px;height:38px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"></path></svg></span><span><strong style="display:block;font-size:11px;color:#4A6B36;font-weight:600">Telefone</strong>(11) 00000-0000</span></a></li>
+      <li><a href="#contato" style="display:flex;gap:12px;align-items:center;color:#333;font-size:12.5px"><span style="flex:none;width:38px;height:38px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle></svg></span><span><strong style="display:block;font-size:11px;color:#4A6B36;font-weight:600">Instagram</strong>@petcare</span></a></li>
+      <li><a href="mailto:contato@petcare.com.br" style="display:flex;gap:12px;align-items:center;color:#333;font-size:12.5px"><span style="flex:none;width:38px;height:38px;border-radius:50%;background:#8E9F80;color:#fff;display:flex;align-items:center;justify-content:center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg></span><span><strong style="display:block;font-size:11px;color:#4A6B36;font-weight:600">E-mail</strong>contato@petcare.com.br</span></a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer style="background:#4A6B36;color:#E4EADF">
+  <div style="max-width:1140px;margin:0 auto;padding:48px 24px 32px;display:flex;flex-wrap:wrap;gap:32px 64px;justify-content:space-between">
+    <div style="flex:1 1 260px;max-width:320px">
+      <div style="font-weight:700;font-size:20px;color:#fff;letter-spacing:.5px;margin-bottom:12px">PETCARE</div>
+      <p style="font-size:12px;line-height:1.75">Pet shop com estética animal, produtos e atendimento veterinário em um só lugar.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:12px">
+        <li><a href="#inicio" style="color:#E4EADF" style-hover="color:#fff">Início</a></li>
+        <li><a href="#sobre" style="color:#E4EADF" style-hover="color:#fff">Sobre</a></li>
+        <li><a href="#servicos" style="color:#E4EADF" style-hover="color:#fff">Serviços</a></li>
+        <li><a href="#galeria" style="color:#E4EADF" style-hover="color:#fff">Galeria</a></li>
+        <li><a href="#contato" style="color:#E4EADF" style-hover="color:#fff">Contato</a></li>
+      </ul>
+    </nav>
+    <div style="font-size:12px;line-height:1.9">
+      <div>(11) 00000-0000</div>
+      <div>contato@petcare.com.br</div>
+      <div>Rua dos Pets, 100 — São Paulo, SP</div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.18)">
+    <p style="max-width:1140px;margin:0 auto;padding:16px 24px;font-size:11px;color:#D6DFCF">© 2026 PetCare. Todos os direitos reservados.</p>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1200, menuOpen: false, active: '#inicio' };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  renderVals() {
+    const isDesktop = this.state.w >= 900;
+    const navItems = [['INÍCIO','#inicio'],['SOBRE','#sobre'],['SERVIÇOS','#servicos'],['PET SHOP','#petshop'],['GALERIA','#galeria'],['VETERINÁRIO','#veterinario'],['CONTATO','#contato']];
+    const nav = navItems.map(([label, href]) => {
+      const on = this.state.active === href;
+      return {
+        label, href, current: on ? 'page' : undefined,
+        onClick: () => this.setState({ active: href, menuOpen: false }),
+        style: { display:'flex', alignItems:'center', padding:'0 16px', fontSize:'10.5px', fontWeight:600, letterSpacing:'.4px', transition:'background .2s,color .2s', background: on ? '#4A6B36' : 'transparent', color: on ? '#fff' : '#333' }
+      };
+    });
+    const btn = (on) => ({ width:'26px', height:'26px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', background: on ? '#4A6B36' : '#B5B5B5', border: on ? '2px solid #2f4522' : '2px solid transparent', transition:'background .2s', marginTop:'auto' });
+    return {
+      isDesktop, isMobile: !isDesktop, menuOpen: this.state.menuOpen,
+      showMobileMenu: !isDesktop && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      nav,
+      highlights: [
+        { paw:true, title:'Quem Somos', text:'Um espaço dedicado ao cuidado, bem-estar e carinho com seu melhor amigo.', href:'#sobre', aria:'Saiba mais sobre quem somos', btnStyle: btn(true) },
+        { scissors:true, title:'Estética Animal', text:'Banho, tosa e cuidados de higiene para deixar seu pet sempre confortável.', href:'#servicos', aria:'Ver serviços de estética', btnStyle: btn(false) },
+        { vet:true, title:'Atendimento Veterinário', text:'Especialidades e exames para acompanhar a saúde do seu pet com segurança.', href:'#veterinario', aria:'Ver atendimento veterinário', btnStyle: btn(false) },
+      ],
+      servicesEst: [
+        { name:'Banho', desc:'Produtos adequados a cada tipo de pelo e pele.' },
+        { name:'Tosa', desc:'Tosa higiênica, na máquina ou na tesoura.' },
+        { name:'Higiene', desc:'Limpeza de ouvidos, corte de unhas e escovação.' },
+      ],
+      servicesVet: [
+        { name:'Cardiologia', desc:'Avaliação e acompanhamento da saúde do coração.' },
+        { name:'Radiologia', desc:'Exames de imagem por raio-X.' },
+        { name:'Oncologia', desc:'Diagnóstico e acompanhamento de tumores.' },
+        { name:'Oftalmologia', desc:'Cuidados com a visão e a saúde dos olhos.' },
+        { name:'Ultrassonografia', desc:'Exame de imagem dos órgãos internos.' },
+        { name:'Ecocardiograma', desc:'Ultrassom detalhado do coração.' },
+        { name:'Eletrocardiograma', desc:'Registro da atividade elétrica cardíaca.' },
+        { name:'Endocrinologia', desc:'Tratamento de alterações hormonais.' },
+        { name:'Exames Laboratoriais', desc:'Sangue, urina e outros exames de rotina.' },
+      ],
+      gallery: [
+        { id:'gal-1', src:'assets/gal-1.jpg', ph:'cachorro pequeno após banho' },
+        { id:'gal-2', src:'assets/gal-2.jpg', ph:'cachorro de porte médio tosado' },
+        { id:'gal-3', src:'assets/gal-3.jpg', ph:'cachorro de pelo longo' },
+        { id:'gal-4', src:'assets/gal-4.jpg', ph:'gato após higiene' },
+        { id:'gal-5', src:'assets/gal-5.jpg', ph:'cão sorrindo após banho' },
+        { id:'gal-6', src:'assets/gal-6.jpg', ph:'cliente após tosa' },
+      ],
+      products: [
+        { id:'prod-racao', src:'assets/prod-racao.jpg', ph:'foto · ração', name:'Ração', desc:'Opções para cada fase e porte.' },
+        { id:'prod-petiscos', src:'assets/prod-petiscos.jpg', ph:'foto · petiscos', name:'Petiscos', desc:'Para agradar e recompensar.' },
+        { id:'prod-brinquedos', src:'assets/prod-brinquedos.jpg', ph:'foto · brinquedos', name:'Brinquedos', desc:'Diversão e gasto de energia.' },
+        { id:'prod-higiene', src:'assets/prod-higiene.jpg', ph:'foto · higiene', name:'Higiene', desc:'Shampoos, tapetes e mais.' },
+        { id:'prod-acessorios', src:'assets/prod-acessorios.jpg', ph:'foto · acessórios', name:'Acessórios', desc:'Coleiras, guias e caminhas.' },
+        { id:'prod-cuidados', src:'assets/prod-cuidados.jpg', ph:'foto · cuidados', name:'Cuidados', desc:'Itens para a saúde no dia a dia.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
